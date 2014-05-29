@@ -25,6 +25,7 @@ Class  EE_Calendar_Table_Template extends EE_Addon {
 		// define the plugin directory path and URL
 		define( 'EE_CALENDAR_TABLE_TEMPLATE_PATH', plugin_dir_path( __FILE__ ));
 		define( 'EE_CALENDAR_TABLE_TEMPLATE_URL', plugin_dir_url( __FILE__ ));
+		define( 'EE_CALENDAR_TABLE_TEMPLATE_TEMPLATES', EE_CALENDAR_TABLE_TEMPLATE_PATH . DS . 'templates' );
 		// register addon via Plugin API
 		EE_Register_Addon::register(
 			'Calendar_Table_Template',
@@ -33,11 +34,9 @@ Class  EE_Calendar_Table_Template extends EE_Addon {
 				'min_core_version' => '4.3.0',
 				'base_path' 				=> EE_CALENDAR_TABLE_TEMPLATE_PATH,
 				'autoloader_paths' => array(
-					'EE_Calendar_Table_Template' 						=> EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EE_Calendar_Table_Template.class.php',
+					'EE_Calendar_Table_Template' 	=> EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EE_Calendar_Table_Template.class.php',
 				),
-				'module_paths' 		=> array( EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EED_Calendar_Table_Template.module.php' ),
-				'shortcode_paths' 	=> array( EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EES_Calendar_Table_Template.shortcode.php' ),
-
+				'shortcode_paths' 	=> array( EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EES_Espresso_Calendar_Table_Template.shortcode.php' ),
 				//The below is for if plugin update engine is being used for auto-updates. not needed if PUE is not being used.
 				'pue_options'			=> array(
 					'pue_plugin_slug' => 'espresso_calendar_table_template',
