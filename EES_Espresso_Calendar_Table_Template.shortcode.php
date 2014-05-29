@@ -108,10 +108,9 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 	 *
 	 * @access 	public
 	 * @param 	array $attributes
-	 * @return 	void
+	 * @return 	string
 	 */
 	public function process_shortcode( $attributes = array() ) {
-		echo '<br/><h5 style="color:#2EA2CC;">' . __CLASS__ . '<span style="font-weight:normal;color:#0074A2"> -> </span>' . __FUNCTION__ . '() <br/><span style="font-size:9px;font-weight:normal;color:#666">' . __FILE__ . '</span>    <b style="font-size:10px;color:#333">  ' . __LINE__ . ' </b></h5>';
 		// make sure $attributes is an array
 		$attributes = array_merge(
 			// defaults
@@ -130,14 +129,15 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 		// run the query
 		global $wp_query;
 		$wp_query = new EE_Calendar_Table_Template_Query( $attributes );
-		//d( $wp_query );
-		// now reset the query and postdata
-		wp_reset_query();
-		wp_reset_postdata();
+//		d( $wp_query );
 		// now filter the array of locations to search for templates
 		add_filter( 'FHEE__EEH_Template__locate_template__template_folder_paths', array( $this, 'template_folder_paths' ));
 		// load our template
-		return EEH_Template::locate_template( 'calendar-table-template.php' );
+		$calendar_table_template = EEH_Template::locate_template( 'espresso-calendar-table-template.template.php' );
+		// now reset the query and postdata
+		wp_reset_query();
+		wp_reset_postdata();
+		return $calendar_table_template;
 	}
 
 
