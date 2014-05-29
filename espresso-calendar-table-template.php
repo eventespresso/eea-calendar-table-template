@@ -2,7 +2,7 @@
 /*
   Plugin Name: Event Espresso - Calendar Table Template
   Plugin URI: http://www.eventespresso.com
-  Description: The Event Espresso New Addon adds NEW stuff to Event Espresso
+  Description: The Event Espresso Calendar Table Template adds NEW stuff to Event Espresso
   Version: 0.0.1.dev.001
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
