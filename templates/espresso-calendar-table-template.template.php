@@ -67,7 +67,7 @@ if ( have_posts() ) :
 				</div>
 			</td>
 		<?php
-		
+
 		echo '<td class="td-event-info"><span class="event-title"><a href="'. $registration_url .'">'.$post->post_title.'</a></span>';
 		echo '<p>';
 
@@ -78,7 +78,9 @@ if ( have_posts() ) :
 		echo (isset($state) && !empty($state)) ? $state .'<br />':'';
 		echo '</p>';
 		//Event description
-		echo wpautop(array_shift(explode('<!--more-->', $post->post_content)));
+		$event_desc = explode('<!--more-->', $post->post_content);
+		$event_desc = array_shift( $event_desc );
+		echo wpautop($event_desc); 
 		echo '</td>';
 		echo '<td class="td-event-register">'.$live_button.'</td>';
 		echo '</tr>';
