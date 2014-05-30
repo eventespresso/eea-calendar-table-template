@@ -70,7 +70,7 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 	 *  @return 	void
 	 */
 	public function run( WP $WP ) {
-		add_action('wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ), 10 );
+		add_action('wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 10 );
 		// You might want this, but delete if you don't need the template tags
 		EE_Registry::instance()->load_helper( 'Event_View' );
 	}
