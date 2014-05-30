@@ -85,7 +85,7 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 	 */
 	public function enqueue_scripts() {
 		//Check to see if the calendar_table_template css file exists in the '/uploads/espresso/' directory
-		if ( is_readable( EVENT_ESPRESSO_UPLOAD_DIR . 'css' . DS . 'calendar_table_template.css' )) {
+		if ( is_readable( EVENT_ESPRESSO_UPLOAD_DIR . 'css' . DS . 'espresso_calendar_table_template.css' )) {
 			//This is the url to the css file if available
 			wp_register_style( 'espresso_calendar_table_template', EVENT_ESPRESSO_UPLOAD_URL . 'css' . DS . 'espresso_calendar_table_template.css' );
 		} else {
