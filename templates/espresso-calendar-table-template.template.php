@@ -15,9 +15,9 @@ if ( have_posts() ) :
 
 		//Create the URL to the event
 		$registration_url = !empty($external_url) ? $post->EE_Event->external_url() : $post->EE_Event->get_permalink();
-		
+
 		$live_button 		= '<a id="a_register_link-'.$post->ID.'" href="'.$registration_url.'"><img class="buytix_button" src="'.EE_CALENDAR_TABLE_TEMPLATE_URL . 'images' . DS .'register-now.png" alt="Buy Tickets"></a>';
-		
+
 		$full_month = date("F", strtotime($post->DTT_EVT_start));
 			if ($temp_month != $full_month){
 				?>
@@ -34,7 +34,7 @@ if ( have_posts() ) :
 			}
 		//d( $post );
 
-		
+
 		//$show_featured = true;
 		//echo $show_featured;
 
@@ -53,14 +53,16 @@ if ( have_posts() ) :
 				</div>
 			</td>
 		<?php
-		
+
 		echo '<td class="td-event-info"><span class="event-title"><a href="'. $registration_url .'">'.$post->post_title.'</a></span>';
 		echo '<p>';
 		//Start date/time
 		echo date(get_option('date_format'). ' '.get_option('time_format'), strtotime($post->DTT_EVT_start)). '<br />';
 		//echo __('Where:', 'event_espresso'). ' '. $post->Venue. '<br />';
 		//Event description
-		echo array_shift(explode('<!--more-->', $post->post_content));
+		$event_desc = explode('<!--more-->', $post->post_content);
+		$event_desc = array_shift( $event_desc );
+		echo $event_desc;
 		echo '</p>';
 		echo '</td>';
 		echo '<td class="td-event-register">'.$live_button.'</td>';
