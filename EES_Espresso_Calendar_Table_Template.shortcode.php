@@ -123,7 +123,9 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 				'month' => NULL,
 				'category_slug' => NULL,
 				'order_by' => 'start_date',
-				'sort' => 'ASC'
+				'sort' => 'ASC',
+				'show_featured' => '0',
+				'table_header' => '1'
 			),
 			(array)$attributes
 		);

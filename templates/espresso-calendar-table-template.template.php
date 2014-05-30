@@ -37,20 +37,26 @@ if ( have_posts() ) :
 			}
 		}
 
-		$full_month = date("F", strtotime($post->DTT_EVT_start));
-		if ($temp_month != $full_month){
-			?>
-			<tr class="cal-header-month">
-				<th class="cal-header-month-name" id="calendar-header-<?php echo $full_month; ?>" colspan="3"><?php echo $full_month; ?></th>
-			</tr>
-			<tr class="cal-header">
-				<th><?php echo !isset($show_featured) || $show_featured === 'false' ? __('Date','event_espresso') :  '' ?></th>
-				<th class="th-event-info"><?php if(isset($change_title)) { echo $change_title; } else { _e('Band / Artist','event_espresso'); } ?></th>
-				<th class="th-tickets"><?php _e('Tickets','event_espresso'); ?></th>
-			</tr>
-			<?php
-			$temp_month = $full_month;
-		}
+		 
+			$full_month = date("F", strtotime($post->DTT_EVT_start));
+			if ($temp_month != $full_month){
+				?>
+				<tr class="cal-header-month">
+					<th class="cal-header-month-name" id="calendar-header-<?php echo $full_month; ?>" colspan="3"><?php echo $full_month; ?></th>
+				</tr>
+			<?php 
+			if(isset($table_header ) && $table_header == '1') { ?>
+
+				<tr class="cal-header">
+					<th><?php echo !isset($show_featured) || $show_featured === 'false' ? __('Date','event_espresso') :  '' ?></th>
+					<th class="th-event-info"><?php if(isset($change_title)) { echo $change_title; } else { _e('Band / Artist','event_espresso'); } ?></th>
+					<th class="th-tickets"><?php _e('Tickets','event_espresso'); ?></th>
+				</tr>
+				<?php
+			}
+				$temp_month = $full_month;
+			}
+
 
 		//Start the table
 		echo '<tr class="event-row" id="event-row-'. $post->ID .'">';
