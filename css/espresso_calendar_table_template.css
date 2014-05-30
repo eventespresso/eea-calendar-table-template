@@ -27,7 +27,7 @@ img.buytix_button {
 	border-top: 1px solid #EDEDED !important;
 }
 .cal-header-month-name {
-	text-align: center;
+	text-align: center !important;
 	background: #E5E5E5;
 	background: -webkit-linear-gradient(top, #E5E5E5 0%, #C4C4C4 100%);
 	background:    -moz-linear-gradient(top, #E5E5E5 0%, #C4C4C4 100%);
@@ -37,6 +37,7 @@ img.buytix_button {
 	font-size: 18px !important;
 	font-weight: bold;
 	color: #333 !important;
+	
 }
 .dater {
 	width: 83px;

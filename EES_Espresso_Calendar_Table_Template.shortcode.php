@@ -133,7 +133,7 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 		// now filter the array of locations to search for templates
 		add_filter( 'FHEE__EEH_Template__locate_template__template_folder_paths', array( $this, 'template_folder_paths' ));
 		// load our template
-		$calendar_table_template = EEH_Template::locate_template( 'espresso-calendar-table-template.template.php' );
+		$calendar_table_template = EEH_Template::locate_template( 'espresso-calendar-table-template.template.php', $attributes );
 		// now reset the query and postdata
 		wp_reset_query();
 		wp_reset_postdata();
