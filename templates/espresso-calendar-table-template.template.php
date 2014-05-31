@@ -79,9 +79,9 @@ if ( have_posts() ) :
 
 		//Start date/time
 		echo date(get_option('date_format'). ' '.get_option('time_format'), strtotime($post->DTT_EVT_start)). '<br />';
-		echo (isset($venue_name) && !empty($venue_name)) ? $venue_name .', ':'';
-		echo (isset($venue_city) && !empty($venue_city)) ? $venue_city .', ':'';
-		echo (isset($state) && !empty($state)) ? $state .'<br />':'';
+		echo (isset($venue_name) && !empty($venue_name)) ? $venue_name : '';
+		echo (isset($venue_city) && !empty($venue_city)) ? ', '.$venue_city :'';
+		echo (isset($state) && !empty($state)) ? ', '.$state : '';
 		echo '</p>';
 		//Event description
 		$event_desc = explode('<!--more-->', $post->post_content);
