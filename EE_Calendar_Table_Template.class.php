@@ -33,6 +33,7 @@ Class  EE_Calendar_Table_Template extends EE_Addon {
 				'version' 					=> EE_CALENDAR_TABLE_TEMPLATE_VERSION,
 				'min_core_version' => '4.3.0',
 				'base_path' 				=> EE_CALENDAR_TABLE_TEMPLATE_PATH,
+				'main_file_path' => EE_CALENDAR_TABLE_TEMPLATE_PATH . 'espresso-calendar-table-template.php',
 				'autoloader_paths' => array(
 					'EE_Calendar_Table_Template' 	=> EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EE_Calendar_Table_Template.class.php',
 				),
