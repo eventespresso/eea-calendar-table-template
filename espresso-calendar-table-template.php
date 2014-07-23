@@ -39,12 +39,12 @@
  *
  * ------------------------------------------------------------------------
  */
+// calendar_table_template version
+define( 'EE_CALENDAR_TABLE_TEMPLATE_VERSION', '0.0.1.dev.001' );
+define( 'EE_CALENDAR_TABLE_TEMPLATE_PLUGIN_FILE', plugin_basename( __FILE__ ));
 
 function load_espresso_calendar_table_template() {
 	if ( class_exists( 'EE_Addon' )) {
-		// calendar_table_template version
-		define( 'EE_CALENDAR_TABLE_TEMPLATE_VERSION', '0.0.1.dev.001' );
-		define( 'EE_CALENDAR_TABLE_TEMPLATE_PLUGIN_FILE', plugin_basename( __FILE__ ));
 		require_once ( plugin_dir_path( __FILE__ ) . 'EE_Calendar_Table_Template.class.php' );
 		EE_Calendar_Table_Template::register_addon();
 	}
