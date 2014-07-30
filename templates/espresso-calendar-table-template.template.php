@@ -22,6 +22,7 @@ if ( have_posts() ) :
 		$live_button 		= '<a id="a_register_link-'.$post->ID.'" href="'.$registration_url.'"><img class="buytix_button" src="'.EE_CALENDAR_TABLE_TEMPLATE_URL . 'images' . DS .'register-now.png" alt="Buy Tickets"></a>';
 		
 		//Get the venue for this event
+		EE_Registry::instance()->load_helper('Venue_View');
 		$venues = espresso_event_venues();
 		$venue = array_shift( $venues );
 		
