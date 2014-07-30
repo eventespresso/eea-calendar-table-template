@@ -38,7 +38,7 @@ Class  EE_Calendar_Table_Template extends EE_Addon {
 				'autoloader_paths' => array(
 					'EE_Calendar_Table_Template' 	=> EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EE_Calendar_Table_Template.class.php',
 				),
-				'shortcode_paths' 	=> array( EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EES_Espresso_Calendar_Table_Template.shortcode.php' ),
+				'shortcode_paths' 	=> array( EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EES_Calendar_Table_Template.shortcode.php' ),
 				//The below is for if plugin update engine is being used for auto-updates. not needed if PUE is not being used.
 				'pue_options'			=> array(
 					'pue_plugin_slug' => 'espresso_calendar_table_template',

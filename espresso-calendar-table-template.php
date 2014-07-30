@@ -4,7 +4,7 @@
   Plugin URI: http://www.eventespresso.com
   Description: The Event Espresso Calendar Table Template adds a calendar table view to Event Espresso 4
   Requirements: (optional) CSS skills to customize styles, some renaming of the table columns
-  Shortcode Example: [ESPRESSO_CALENDAR_TABLE_TEMPLATE]
+  Shortcode Example: [CALENDAR_TABLE_TEMPLATE]
   Shortcode Parameters: show_featured=1 (shows the featured image), table_header=0 (hides the TH row)
   Version: 0.0.1.dev.001
   Author: Event Espresso

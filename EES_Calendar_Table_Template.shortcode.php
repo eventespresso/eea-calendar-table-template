@@ -15,7 +15,7 @@
  *
  * ------------------------------------------------------------------------
  *
- * EES_Espresso_Calendar_Table_Template
+ * EES_Calendar_Table_Template
  *
  * @package			Event Espresso
  * @subpackage		espresso-new-addon
@@ -24,7 +24,7 @@
  *
  * ------------------------------------------------------------------------
  */
-class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
+class EES_Calendar_Table_Template  extends EES_Shortcode {
 
 
 
@@ -105,7 +105,7 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 	/**
 	 *    process_shortcode
 	 *
-	 *    [ESPRESSO_CALENDAR_TABLE_TEMPLATE]
+	 *    [CALENDAR_TABLE_TEMPLATE]
 	 *
 	 * @access 	public
 	 * @param 	array $attributes
