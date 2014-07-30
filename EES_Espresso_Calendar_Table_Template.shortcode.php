@@ -105,7 +105,7 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 	/**
 	 *    process_shortcode
 	 *
-	 *    [CALENDAR_TABLE_TEMPLATE]
+	 *    [ESPRESSO_CALENDAR_TABLE_TEMPLATE]
 	 *
 	 * @access 	public
 	 * @param 	array $attributes
