@@ -118,7 +118,7 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 			array(
 				'title' => NULL,
 				'limit' => 10,
-				'css_class' => NULL,
+				//'css_class' => NULL,
 				'show_expired' => FALSE,
 				'month' => NULL,
 				'category_slug' => NULL,

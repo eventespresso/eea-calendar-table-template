@@ -50,7 +50,7 @@ if ( have_posts() ) :
 
 				<tr class="cal-header">
 					<th><?php echo !isset($show_featured) || $show_featured === 'false' ? __('Date','event_espresso') :  '' ?></th>
-					<th class="th-event-info"><?php if(isset($change_title)) { echo $change_title; } else { _e('Band / Artist','event_espresso'); } ?></th>
+					<th class="th-event-info"><?php if(isset($title)) { echo $title; } else { _e('Band / Artist','event_espresso'); } ?></th>
 					<th class="th-tickets"><?php _e('Tickets','event_espresso'); ?></th>
 				</tr>
 				<?php
