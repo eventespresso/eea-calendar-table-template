@@ -21,10 +21,7 @@ img.buytix_button {
 }
 .cal-table-list td {
 	vertical-align: top !important;
-	border-left: 0px;
-	border-bottom: 0px;
 	padding-top: 10px !important;
-	border-top: 1px solid #EDEDED !important;
 }
 .cal-header-month-name {
 	text-align: center !important;

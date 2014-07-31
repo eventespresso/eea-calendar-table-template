@@ -95,6 +95,7 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 		}
 		// calendar_table_template script
 		wp_register_script( 'espresso_calendar_table_template', EE_CALENDAR_TABLE_TEMPLATE_URL . 'scripts' . DS . 'espresso_calendar_table_template.js', array( 'jquery' ), EE_CALENDAR_TABLE_TEMPLATE_VERSION, TRUE );
+		
 		// enqueue
 		wp_enqueue_style( 'espresso_calendar_table_template' );
 		wp_enqueue_script( 'espresso_calendar_table_template' );
