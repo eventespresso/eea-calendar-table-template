@@ -62,11 +62,14 @@ if ( have_posts() ) :
 		//Start the table
 		echo '<tr class="event-row" id="event-row-'. $post->ID .'">';
 		if(isset($show_featured ) && $show_featured == '1' && has_post_thumbnail( $post->ID )) { ?>
-				<td class="td-fet-image"><div class="">
+				<td class="td-fet-image">
+					<div class="">
 					<?php echo $post->EE_Event->feature_image('thumbnail'/*, array('align'=>'left', 'style'=>'margin:10px; border:1px solid #ccc')*/); ?>
-				</div>
+					</div>
+				</td>
 		<?php } else { ?>
-			<td class="td-date-holder"><div class="dater">
+			<td class="td-date-holder">
+				<div class="dater">
 					<div class="cal-day-title"><?php echo date("l", strtotime($post->DTT_EVT_start)); ?></div>
 					<div class="cal-day-num"><?php echo date("j", strtotime($post->DTT_EVT_start)); ?></div>
 					<div><span><?php echo date("M", strtotime($post->DTT_EVT_start)); ?></span></div>
