@@ -1,5 +1,8 @@
 <?php
 $temp_month = '';
+// Load Venue View Helper
+EE_Registry::instance()->load_helper('Venue_View');
+
 if ( have_posts() ) :
 	// allow other stuff
 	do_action( 'AHEE__espresso_calendar_table_template_template__before_loop' );
@@ -22,7 +25,7 @@ if ( have_posts() ) :
 		$live_button 		= '<a id="a_register_link-'.$post->ID.'" href="'.$registration_url.'"><img class="buytix_button" src="'.EE_CALENDAR_TABLE_TEMPLATE_URL . 'images' . DS .'register-now.png" alt="Buy Tickets"></a>';
 		
 		//Get the venue for this event
-		EE_Registry::instance()->load_helper('Venue_View');
+		
 		$venues = espresso_event_venues();
 		$venue = array_shift( $venues );
 		
@@ -36,8 +39,12 @@ if ( have_posts() ) :
 			if ($venue->state_obj() instanceof EE_State ) {
 				$state = $venue->state_obj()->name();
 			}
+		} else {
+			$venue_name = '';
+			$venue_address = '';
+			$venue_city = '';
+			$state = '';
 		}
-
 		 
 			$full_month = date("F", strtotime($post->DTT_EVT_start));
 			if ($temp_month != $full_month){
