@@ -2,6 +2,9 @@
 $temp_month = '';
 // Load Venue View Helper
 EE_Registry::instance()->load_helper('Venue_View');
+// Options
+$date_option = get_option( 'date_format' );
+$time_option = get_option( 'time_format' );
 
 if ( have_posts() ) :
 	// allow other stuff
@@ -46,7 +49,7 @@ if ( have_posts() ) :
 			$state = '';
 		}
 		 
-			$full_month = date("F", strtotime($post->DTT_EVT_start));
+			$full_month = date_i18n( 'F', strtotime( EEH_Event_View::the_event_date() ) );
 			if ($temp_month != $full_month){
 				?>
 				<tr class="cal-header-month">
@@ -77,9 +80,9 @@ if ( have_posts() ) :
 		<?php } else { ?>
 			<td class="td-date-holder">
 				<div class="dater">
-					<div class="cal-day-title"><?php echo date("l", strtotime($post->DTT_EVT_start)); ?></div>
-					<div class="cal-day-num"><?php echo date("j", strtotime($post->DTT_EVT_start)); ?></div>
-					<div><span><?php echo date("M", strtotime($post->DTT_EVT_start)); ?></span></div>
+					<div class="cal-day-title"><?php echo date_i18n( 'l', strtotime( EEH_Event_View::the_event_date() ) ); ?></div>
+					<div class="cal-day-num"><?php echo date_i18n( 'j', strtotime( EEH_Event_View::the_event_date() ) ); ?></div>
+					<div><span><?php echo date_i18n( 'M', strtotime( EEH_Event_View::the_event_date() ) ); ?></span></div>
 				<?php } ?>
 				</div>
 			</td>
@@ -89,7 +92,8 @@ if ( have_posts() ) :
 		echo '<p>';
 
 		//Start date/time
-		echo date(get_option('date_format'). ' '.get_option('time_format'), strtotime($post->DTT_EVT_start)). '<br />';
+		espresso_event_date( $date_option, $time_option );
+		echo '<br />';
 		echo (isset($venue_name) && !empty($venue_name)) ? $venue_name : '';
 		echo (isset($venue_city) && !empty($venue_city)) ? ', '.$venue_city :'';
 		echo (isset($state) && !empty($state)) ? ', '.$state : '';
