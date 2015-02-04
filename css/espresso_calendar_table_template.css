@@ -21,13 +21,10 @@ img.buytix_button {
 }
 .cal-table-list td {
 	vertical-align: top !important;
-	border-left: 0px;
-	border-bottom: 0px;
 	padding-top: 10px !important;
-	border-top: 1px solid #EDEDED !important;
 }
 .cal-header-month-name {
-	text-align: center;
+	text-align: center !important;
 	background: #E5E5E5;
 	background: -webkit-linear-gradient(top, #E5E5E5 0%, #C4C4C4 100%);
 	background:    -moz-linear-gradient(top, #E5E5E5 0%, #C4C4C4 100%);
@@ -37,6 +34,7 @@ img.buytix_button {
 	font-size: 18px !important;
 	font-weight: bold;
 	color: #333 !important;
+	
 }
 .dater {
 	width: 83px;
@@ -99,10 +97,8 @@ div.cal-day-num {
 .td-fet-image {
 	width: 150px;
 	text-align: left;
-	padding-left: 0px !important;
 	padding-top: 10px !important;
 	padding-bottom: 10px !important;
-	border: none;
 }
 .td-date-holder {
 	width: 120px;
@@ -117,6 +113,7 @@ div.cal-day-num {
 }
 .td-event-register {
 	padding: 40px 5px 5px 0px !important;
+	min-width: 90px;
 }
 .th-tickets {
 	min-width: 90px;

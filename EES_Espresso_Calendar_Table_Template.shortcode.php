@@ -15,7 +15,7 @@
  *
  * ------------------------------------------------------------------------
  *
- * EES_Espresso_Calendar_Table_Template
+ * EES_Calendar_Table_Template
  *
  * @package			Event Espresso
  * @subpackage		espresso-new-addon
@@ -73,6 +73,7 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 		add_action('wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 10 );
 		// You might want this, but delete if you don't need the template tags
 		EE_Registry::instance()->load_helper( 'Event_View' );
+		EE_Registry::instance()->load_helper( 'Venue_View' );
 	}
 
 
@@ -94,6 +95,7 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 		}
 		// calendar_table_template script
 		wp_register_script( 'espresso_calendar_table_template', EE_CALENDAR_TABLE_TEMPLATE_URL . 'scripts' . DS . 'espresso_calendar_table_template.js', array( 'jquery' ), EE_CALENDAR_TABLE_TEMPLATE_VERSION, TRUE );
+		
 		// enqueue
 		wp_enqueue_style( 'espresso_calendar_table_template' );
 		wp_enqueue_script( 'espresso_calendar_table_template' );
@@ -117,12 +119,14 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 			array(
 				'title' => NULL,
 				'limit' => 10,
-				'css_class' => NULL,
+				//'css_class' => NULL,
 				'show_expired' => FALSE,
 				'month' => NULL,
 				'category_slug' => NULL,
 				'order_by' => 'start_date',
-				'sort' => 'ASC'
+				'sort' => 'ASC',
+				'show_featured' => '0',
+				'table_header' => '1'
 			),
 			(array)$attributes
 		);
@@ -133,7 +137,7 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 		// now filter the array of locations to search for templates
 		add_filter( 'FHEE__EEH_Template__locate_template__template_folder_paths', array( $this, 'template_folder_paths' ));
 		// load our template
-		$calendar_table_template = EEH_Template::locate_template( 'espresso-calendar-table-template.template.php' );
+		$calendar_table_template = EEH_Template::locate_template( 'espresso-calendar-table-template.template.php', $attributes );
 		// now reset the query and postdata
 		wp_reset_query();
 		wp_reset_postdata();
@@ -233,10 +237,12 @@ class EE_Calendar_Table_Template_Query extends WP_Query {
 		remove_filter( 'posts_join', array( $this, 'posts_join' ));
 		// generate the SQL
 		if ( $this->_category_slug !== NULL ) {
-			$SQL .= EED_Events_Archive::posts_join_sql_for_terms( TRUE );
+				EE_Registry::instance()->load_helper( 'Event_Query' );
+				$SQL .= EEH_Event_Query::posts_join_sql_for_terms( TRUE );
 		}
 		if ( $this->_order_by !== NULL ) {
-			$SQL .= EED_Events_Archive::posts_join_for_orderby( $this->_order_by );
+				EE_Registry::instance()->load_helper( 'Event_Query' );
+				$SQL .= EEH_Event_Query::posts_join_for_orderby( $this->_order_by );
 		}
 		return $SQL;
 	}
@@ -255,11 +261,14 @@ class EE_Calendar_Table_Template_Query extends WP_Query {
 		remove_filter( 'posts_where', array( $this, 'posts_where' ));
 		// Show Expired ?
 		$this->_show_expired = $this->_show_expired ? TRUE : FALSE;
-		$SQL .= EED_Events_Archive::posts_where_sql_for_show_expired( $this->_show_expired );
-		// Category
-		$SQL .=  EED_Events_Archive::posts_where_sql_for_event_category_slug( $this->_category_slug );
-		// Start Date
-		$SQL .= EED_Events_Archive::posts_where_sql_for_event_list_month( $this->_month );
+
+			EE_Registry::instance()->load_helper( 'Event_Query' );
+			$SQL .= EEH_Event_Query::posts_where_sql_for_show_expired( $this->_show_expired );
+			// Category
+			$SQL .=  EEH_Event_Query::posts_where_sql_for_event_category_slug( $this->_category_slug );
+			// Start Date
+			$SQL .= EEH_Event_Query::posts_where_sql_for_event_list_month( $this->_month );
+
 		return $SQL;
 	}
 
@@ -276,7 +285,8 @@ class EE_Calendar_Table_Template_Query extends WP_Query {
 		// first off, let's remove any filters from previous queries
 		remove_filter( 'posts_orderby', array( $this, 'posts_orderby' ) );
 		// generate the SQL
-		$SQL = EED_Events_Archive::posts_orderby_sql( $this->_order_by, $this->_sort );
+			EE_Registry::instance()->load_helper( 'Event_Query' );
+			$SQL = EEH_Event_Query::posts_orderby_sql( $this->_order_by, $this->_sort );
 		return $SQL;
 	}
 

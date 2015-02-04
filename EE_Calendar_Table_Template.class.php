@@ -11,6 +11,10 @@
  *
  * ------------------------------------------------------------------------
  */
+// define the plugin directory path and URL
+		define( 'EE_CALENDAR_TABLE_TEMPLATE_PATH', plugin_dir_path( __FILE__ ));
+		define( 'EE_CALENDAR_TABLE_TEMPLATE_URL', plugin_dir_url( __FILE__ ));
+		define( 'EE_CALENDAR_TABLE_TEMPLATE_TEMPLATES', EE_CALENDAR_TABLE_TEMPLATE_PATH . DS . 'templates' );
 Class  EE_Calendar_Table_Template extends EE_Addon {
 
 	/**
@@ -22,10 +26,7 @@ Class  EE_Calendar_Table_Template extends EE_Addon {
 	}
 
 	public static function register_addon() {
-		// define the plugin directory path and URL
-		define( 'EE_CALENDAR_TABLE_TEMPLATE_PATH', plugin_dir_path( __FILE__ ));
-		define( 'EE_CALENDAR_TABLE_TEMPLATE_URL', plugin_dir_url( __FILE__ ));
-		define( 'EE_CALENDAR_TABLE_TEMPLATE_TEMPLATES', EE_CALENDAR_TABLE_TEMPLATE_PATH . DS . 'templates' );
+		
 		// register addon via Plugin API
 		EE_Register_Addon::register(
 			'Calendar_Table_Template',
@@ -33,6 +34,8 @@ Class  EE_Calendar_Table_Template extends EE_Addon {
 				'version' 					=> EE_CALENDAR_TABLE_TEMPLATE_VERSION,
 				'min_core_version' => '4.3.0',
 				'base_path' 				=> EE_CALENDAR_TABLE_TEMPLATE_PATH,
+				'main_file_path' => EE_CALENDAR_TABLE_TEMPLATE_PATH . 'espresso-calendar-table-template.php',
+				//'admin_callback'		=> 'additional_admin_hooks',
 				'autoloader_paths' => array(
 					'EE_Calendar_Table_Template' 	=> EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EE_Calendar_Table_Template.class.php',
 				),
