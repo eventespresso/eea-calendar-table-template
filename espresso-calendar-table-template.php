@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: Event Espresso - Calendar Table Template
+  Plugin Name: Event Espresso - Calendar Table Template (EE 4.3+)
   Plugin URI: http://www.eventespresso.com
   Description: The Event Espresso Calendar Table Template adds a calendar table view to Event Espresso 4
   Version: 0.0.1.dev.001
