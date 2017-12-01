@@ -130,6 +130,15 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 			),
 			(array)$attributes
 		);
+        // the following get sanitized/whitelisted in EEH_Event_Query
+        $custom_sanitization = array(
+            'category_slug' => 'skip_sanitization',
+            'show_expired'  => 'skip_sanitization',
+            'order_by'      => 'skip_sanitization',
+            'month'         => 'skip_sanitization',
+            'sort'          => 'skip_sanitization',
+        );
+        $attributes = \EES_Shortcode::sanitize_attributes($attributes, $custom_sanitization);
 		// run the query
 		global $wp_query;
 		$wp_query = new EE_Calendar_Table_Template_Query( $attributes );
@@ -175,11 +184,11 @@ class EES_Espresso_Calendar_Table_Template  extends EES_Shortcode {
 class EE_Calendar_Table_Template_Query extends WP_Query {
 
 	private $_limit = 10;
-	private $_show_expired = FALSE;
-	private $_month = NULL;
-	private $_category_slug = NULL;
-	private $_order_by = NULL;
-	private $_sort = NULL;
+	private $_show_expired = false;
+	private $_month;
+	private $_category_slug;
+	private $_order_by;
+	private $_sort;
 
 
 	/**
@@ -203,6 +212,17 @@ class EE_Calendar_Table_Template_Query extends WP_Query {
 			$this->_order_by = array_map('trim', $this->_order_by);
 		}
 		$this->_sort = in_array( $this->_sort, array( 'ASC', 'asc', 'DESC', 'desc' )) ? strtoupper( $this->_sort ) : 'ASC';
+        EE_Registry::instance()->load_helper('Event_Query');
+        //add query filters
+        EEH_Event_Query::add_query_filters();
+        // set params that will get used by the filters
+        EEH_Event_Query::set_query_params(
+            $this->_month,
+            $this->_category_slug,
+            $this->_show_expired,
+            $this->_order_by,
+            $this->_sort
+        );
 		// the current "page" we are viewing
 		$paged = max( 1, get_query_var( 'paged' ));
 		// Force these args
@@ -214,87 +234,9 @@ class EE_Calendar_Table_Template_Query extends WP_Query {
 			'paged' => $paged,
 			'offset' => ( $paged - 1 ) * $this->_limit
 		));
-		// filter the query parts
-		add_filter( 'posts_join', array( $this, 'posts_join' ), 10, 1 );
-		add_filter( 'posts_where', array( $this, 'posts_where' ), 10, 1 );
-		add_filter( 'posts_orderby', array( $this, 'posts_orderby' ), 10, 1 );
-
 		// run the query
 		parent::__construct( $args );
 	}
-
-
-
-	/**
-	 *    posts_join
-	 *
-	 * @access    public
-	 * @param $SQL
-	 * @return    string
-	 */
-	public function posts_join( $SQL ) {
-		// first off, let's remove any filters from previous queries
-		remove_filter( 'posts_join', array( $this, 'posts_join' ));
-		// generate the SQL
-		if ( $this->_category_slug !== NULL ) {
-				EE_Registry::instance()->load_helper( 'Event_Query' );
-				$SQL .= EEH_Event_Query::posts_join_sql_for_terms( TRUE );
-		}
-		if ( $this->_order_by !== NULL ) {
-				EE_Registry::instance()->load_helper( 'Event_Query' );
-				$SQL .= EEH_Event_Query::posts_join_for_orderby( $this->_order_by );
-		}
-		return $SQL;
-	}
-
-
-
-	/**
-	 *    posts_where
-	 *
-	 * @access    public
-	 * @param $SQL
-	 * @return    string
-	 */
-	public function posts_where( $SQL ) {
-		// first off, let's remove any filters from previous queries
-		remove_filter( 'posts_where', array( $this, 'posts_where' ));
-		// Show Expired ?
-		$this->_show_expired = $this->_show_expired ? TRUE : FALSE;
-
-			EE_Registry::instance()->load_helper( 'Event_Query' );
-			$SQL .= EEH_Event_Query::posts_where_sql_for_show_expired( $this->_show_expired );
-			// Category
-			$SQL .=  EEH_Event_Query::posts_where_sql_for_event_category_slug( $this->_category_slug );
-			// Start Date
-			$SQL .= EEH_Event_Query::posts_where_sql_for_event_list_month( $this->_month );
-
-		return $SQL;
-	}
-
-
-
-	/**
-	 *    posts_orderby
-	 *
-	 * @access    public
-	 * @param $SQL
-	 * @return    string
-	 */
-	public function posts_orderby( $SQL ) {
-		// first off, let's remove any filters from previous queries
-		remove_filter( 'posts_orderby', array( $this, 'posts_orderby' ) );
-		// generate the SQL
-			EE_Registry::instance()->load_helper( 'Event_Query' );
-			$SQL = EEH_Event_Query::posts_orderby_sql( $this->_order_by, $this->_sort );
-		return $SQL;
-	}
-
-
-
-
-
-
 
 }
 
