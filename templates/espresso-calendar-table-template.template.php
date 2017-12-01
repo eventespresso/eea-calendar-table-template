@@ -48,8 +48,12 @@ if ( have_posts() ) :
 			$venue_city = '';
 			$state = '';
 		}
-		 
-			$full_month = date_i18n( 'F', strtotime( EEH_Event_View::the_event_date() ) );
+		// Pull the datetimes for this event order by start_date/time
+		$datetimes = EEM_Datetime::instance()->get_datetimes_for_event_ordered_by_start_time( $post->ID, $show_expired, false, null );
+				
+		// Reset the datetimes pointer to the earlest datetime and use that one.
+		$datetime = reset( $datetimes );
+			$full_month = date_i18n( 'F', strtotime( $datetime->start_date('m') ) );
 			if ($temp_month != $full_month){
 				?>
 				<tr class="cal-header-month">
