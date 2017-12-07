@@ -139,11 +139,10 @@ class EES_Espresso_Calendar_Table_Template extends EES_Shortcode
             array(
                 'title'         => null,
                 'limit'         => 10,
-                //'css_class'   => NULL,
                 'show_expired'  => false,
                 'month'         => null,
                 'category_slug' => null,
-                'order_by'      => 'start_date',
+                'order_by'      => 'DTT_EVT_start',
                 'sort'          => 'ASC',
                 'show_featured' => '0',
                 'table_header'  => '1'
@@ -159,20 +158,17 @@ class EES_Espresso_Calendar_Table_Template extends EES_Shortcode
             'sort'          => 'skip_sanitization',
         );
         $attributes = \EES_Shortcode::sanitize_attributes($attributes, $custom_sanitization);
-        // run the query
-        global $wp_query;
-        $wp_query = new EE_Calendar_Table_Template_Query($attributes);
-//		d( $wp_query );
         // now filter the array of locations to search for templates
         add_filter(
             'FHEE__EEH_Template__locate_template__template_folder_paths', 
             array($this, 'template_folder_paths')
         );
         // load our template
-        $calendar_table_template = EEH_Template::locate_template('espresso-calendar-table-template.template.php', $attributes);
-        // now reset the query and postdata
-        wp_reset_query();
-        wp_reset_postdata();
+        $calendar_table_template = EEH_Template::get_template_part(
+            'loop',
+            'espresso_events-calendar-table.template',
+            array('attributes' => $attributes)
+        );
         return $calendar_table_template;
     }
 
