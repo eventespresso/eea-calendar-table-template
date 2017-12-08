@@ -145,7 +145,7 @@ class EES_Espresso_Calendar_Table_Template extends EES_Shortcode
                 'order_by'      => 'DTT_EVT_start',
                 'sort'          => 'ASC',
                 'show_featured' => '0',
-                'table_header'  => '1'
+                'table_header'  => '0'
             ),
             (array)$attributes
         );
