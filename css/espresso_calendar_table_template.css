@@ -26,6 +26,7 @@ img.buytix_button {
 .status-action-text {
 	float: right;
 	width: 20%;
+	text-align: right;
 }
 .cal-table-list td {
 	vertical-align: top !important;
