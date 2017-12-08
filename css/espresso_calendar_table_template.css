@@ -19,6 +19,14 @@ img.buytix_button {
 	-webkit-box-shadow: 0px 0px 0px;
 	box-shadow:         0px 0px 0px;
 }
+.info-main {
+	float: left;
+	width: 80%;
+}
+.status-action-text {
+	float: right;
+	width: 20%;
+}
 .cal-table-list td {
 	vertical-align: top !important;
 	padding-top: 10px !important;
@@ -133,5 +141,13 @@ div.cal-day-num {
 }
 
 @media only screen and (max-width: 480px) {
+	.info-main {
+		float: none;
+		width: auto;
+	}
+	.status-action-text {
+		float: none;
+		width: auto;
+	}
 }
 
