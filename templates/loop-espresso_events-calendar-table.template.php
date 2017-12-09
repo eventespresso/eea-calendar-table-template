@@ -3,6 +3,12 @@
 $date_option = get_option('date_format');
 $time_option = get_option('time_format');
 $temp_month = '';
+$button_text = !isset($attributes['button_text']) ? 
+                    esc_html__('View Details', 'event_espresso') : 
+                    $attributes['button_text'];
+$sold_out_btn_text = $attributes['sold_out_btn_text'];
+$sold_out_btn_text = !isset($sold_out_btn_text) ? esc_html__('Sold Out', 'event_espresso') : $sold_out_btn_text;
+
 $category_id_or_slug = $attributes['category_slug'];
 $title = $attributes['title'];
 $table_header = filter_var($attributes['table_header'], FILTER_VALIDATE_BOOLEAN);
@@ -100,12 +106,14 @@ if (class_exists('EE_Registry')) :
                     'content',
                     'espresso_events-calendar.template',
                     array(
-                        'datetime'      => $datetime,
-                        'event'         => $event,
-                        'date_option'   => $date_option,
-                        'time_option'   => $time_option,
-                        'show_featured' => $show_featured,
-                        'table_header'  => $table_header,
+                        'datetime'          => $datetime,
+                        'event'             => $event,
+                        'date_option'       => $date_option,
+                        'time_option'       => $time_option,
+                        'show_featured'     => $show_featured,
+                        'table_header'      => $table_header,
+                        'button_text'       => $button_text,
+                        'sold_out_btn_text' => $sold_out_btn_text
                     )
                 );
             }

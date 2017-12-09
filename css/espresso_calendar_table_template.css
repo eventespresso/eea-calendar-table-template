@@ -21,12 +21,24 @@ img.buytix_button {
 }
 .info-main {
 	float: left;
-	width: 80%;
+	width: 70%;
 }
 .status-action-text {
 	float: right;
 	width: 20%;
-	text-align: right;
+	margin-right: 2px;
+}
+.status-action-text a {
+	padding: 12px 6px;
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+	font-weight: bold;
+	color: #333;
+}
+.external-url:after {
+	font-family: dashicons;
+	content: "\f504";
 }
 .cal-table-list td {
 	vertical-align: top !important;
@@ -54,6 +66,9 @@ img.buytix_button {
 	background:      -o-linear-gradient(top, #fcfcfc 0%, #dad8d8 100%);
 	background:     -ms-linear-gradient(top, #fcfcfc 0%, #dad8d8 100%);
 	background:         linear-gradient(top, #fcfcfc 0%, #dad8d8 100%);
+}
+.dater,
+.status-action-text {
 	border: 1px solid #d2d2d2;
 	border-radius: 10px;
 	-webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
@@ -128,11 +143,19 @@ div.cal-day-num {
 	min-width: 90px;
 }
 
-
 /* Media Query for screens smaller then 768px (iPad portrait)
 ---------------------------------------------------------------------------------------------------- */
 
 @media only screen and (max-width: 767px) {
+	.info-main {
+		float: none;
+		width: auto;
+	}
+	.status-action-text {
+		float: none;
+		width: 40%;
+		margin-top: 10px;
+	}
 }
 
 @media only screen and (max-width: 600px) and (min-width: 481px) {
@@ -142,13 +165,9 @@ div.cal-day-num {
 }
 
 @media only screen and (max-width: 480px) {
-	.info-main {
-		float: none;
-		width: auto;
-	}
 	.status-action-text {
-		float: none;
-		width: auto;
+		width: 80%;
+		margin: 10px auto;
 	}
 }
 

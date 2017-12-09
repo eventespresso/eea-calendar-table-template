@@ -137,15 +137,17 @@ class EES_Espresso_Calendar_Table_Template extends EES_Shortcode
         $attributes = array_merge(
             // defaults
             array(
-                'title'         => null,
-                'limit'         => 10,
-                'show_expired'  => false,
-                'month'         => null,
-                'category_slug' => null,
-                'order_by'      => 'DTT_EVT_start',
-                'sort'          => 'ASC',
-                'show_featured' => '0',
-                'table_header'  => '0'
+                'title'             => null,
+                'limit'             => 10,
+                'show_expired'      => false,
+                'month'             => null,
+                'category_slug'     => null,
+                'order_by'          => 'DTT_EVT_start',
+                'sort'              => 'ASC',
+                'show_featured'     => '0',
+                'table_header'      => '0',
+                'button_text'       => null,
+                'sold_out_btn_text' => null
             ),
             (array)$attributes
         );

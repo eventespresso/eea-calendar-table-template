@@ -1,15 +1,17 @@
 <?php
 //Check if external URL
-$external_url = $event->external_url();
+$external_url       = $event->external_url();
 
 //Create the URL to the event
-$registration_url = !empty($external_url) ? $event->external_url() : $event->get_permalink();
-
-//Button Text
-$button_text      = '<a id="a_register_link-'.$event->id().'" href="'.$registration_url.'"><img class="buytix_button" src="'.EE_CALENDAR_TABLE_TEMPLATE_URL . 'images' . DS .'register-now.png" alt="Buy Tickets"></a>';
+$registration_url   = !empty($external_url) ? $external_url : $event->get_permalink();
+$ext_link_class		= !empty($external_url) ? 'external-url' : '';
+//Button text
+$live_button 		= '<a class="a-register-link '.$ext_link_class.'" href="'.$registration_url.'">'.$button_text.'</a>';
+if ( $event->is_sold_out() ) {
+	$live_button	= '<a class="a-register-link-sold-out a-register-link" href="'.$registration_url.'">'.$sold_out_btn_text.'</a>';
+}
 
 //Get the venue for this event
-
 $venues = $event->venues();
 $venue = reset($venues);
 
@@ -67,7 +69,7 @@ if (isset($show_featured) && $show_featured == true && has_post_thumbnail($event
 			?>
 			<div class="description"><?php echo $event_desc; ?></div>
 		</div><!-- end .info-main -->
-		<div class="status-action-text"><?php echo $button_text; ?></div>
+		<div class="status-action-text"><?php echo $live_button; ?></div>
 	</div><!-- end .info-wrapper -->
 </td>
 </tr>
