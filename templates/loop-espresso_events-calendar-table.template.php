@@ -54,10 +54,14 @@ $where['Event.status'] = array(
         $public_event_stati
     )
 );
-$today = current_time('mysql');
 if ($show_expired == false) {
-    $where['DTT_EVT_end*3'] = array('>=',$today);
+    $where['DTT_EVT_start*3'] = array('>=',current_time('mysql'));
 }
+$where = apply_filters(
+    'FHEE__loop_espresso_events_calendar_table_template__where_params',
+    $where,
+    $show_expired
+);
 
 // run the query
 if (class_exists('EE_Registry')) :
