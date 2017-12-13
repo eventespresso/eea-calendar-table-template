@@ -1,15 +1,17 @@
 <?php
 //Check if external URL
-$external_url = $event->external_url();
+$external_url       = $event->external_url();
 
 //Create the URL to the event
-$registration_url = !empty($external_url) ? $event->external_url() : $event->get_permalink();
-
-//Create the registrer now button
-$live_button      = '<a id="a_register_link-'.$event->id().'" href="'.$registration_url.'"><img class="buytix_button" src="'.EE_CALENDAR_TABLE_TEMPLATE_URL . 'images' . DS .'register-now.png" alt="Buy Tickets"></a>';
+$registration_url   = !empty($external_url) ? $external_url : $event->get_permalink();
+$ext_link_class		= !empty($external_url) ? 'external-url' : '';
+//Button text
+$live_button 		= '<a class="a-register-link '.$ext_link_class.'" href="'.$registration_url.'">'.$button_text.'</a>';
+if ( $event->is_sold_out() ) {
+	$live_button	= '<a class="a-register-link-sold-out a-register-link" href="'.$registration_url.'">'.$sold_out_btn_text.'</a>';
+}
 
 //Get the venue for this event
-
 $venues = $event->venues();
 $venue = reset($venues);
 
@@ -44,23 +46,31 @@ if (isset($show_featured) && $show_featured == true && has_post_thumbnail($event
         </div>
     </td>
 <?php endif;
-
-echo '<td class="td-event-info"><span class="event-title"><a href="'. $registration_url .'">'.$event->name().'</a></span>';
-// Start date/time
-echo '<div class="event-time-info">';
-$datetime->e_start_date_and_time($date_option, $time_option);
-echo '</div>';
-// Venue info
-echo '<div class="venue-info">';
-echo (isset($venue_name) && !empty($venue_name)) ? $venue_name : '';
-echo (isset($venue_city) && !empty($venue_city)) ? ', '.$venue_city :'';
-echo (isset($state) && !empty($state)) ? ', '.$state : '';
-echo '</div>';
-//Event description
-$event_desc = explode('<!--more-->', $event->description_filtered());
-$event_desc = array_shift($event_desc);
-echo '<div class="description">'.$event_desc.'</div>';
-echo '</td>';
-echo '<td class="td-event-register">'.$live_button.'</td>';
-echo '</tr>';
+?>
+<td class="td-event-info">
+	<div class="info-wrapper">
+		<div class="info-main">
+			<span class="event-title">
+				<a href="<?php echo $registration_url; ?>"><?php echo $event->name(); ?></a>
+			</span>
+			<div class="event-time-info">
+				<?php $datetime->e_start_date_and_time($date_option, $time_option); // Start date/time ?>
+			</div><!-- end .event-time-info -->
+			<div class="venue-info">
+				<?php $venue_info  = (isset($venue_name) && !empty($venue_name)) ? $venue_name : '';
+					  $venue_info .= (isset($venue_city) && !empty($venue_city)) ? ', '.$venue_city :'';
+					  $venue_info .= (isset($state) && !empty($state)) ? ', '.$state : '';
+					  echo $venue_info;
+				?>
+			</div><!-- end .venue-info -->
+			<?php //Event description
+			$event_desc = explode('<!--more-->', $event->description_filtered());
+			$event_desc = array_shift($event_desc);
+			?>
+			<div class="description"><?php echo $event_desc; ?></div>
+		</div><!-- end .info-main -->
+		<div class="status-action-text"><?php echo $live_button; ?></div>
+	</div><!-- end .info-wrapper -->
+</td>
+</tr>
 
