@@ -14,6 +14,7 @@ $title = $attributes['title'];
 $table_header = filter_var($attributes['table_header'], FILTER_VALIDATE_BOOLEAN);
 $show_expired = filter_var($attributes['show_expired'], FILTER_VALIDATE_BOOLEAN);
 $show_featured = filter_var($attributes['show_featured'], FILTER_VALIDATE_BOOLEAN);
+$fallback_img = $attributes['fallback_img'];
 
 if ( $category_id_or_slug ) {
     //Allow for multiple categories
@@ -117,7 +118,8 @@ if (class_exists('EE_Registry')) :
                         'show_featured'     => $show_featured,
                         'table_header'      => $table_header,
                         'button_text'       => $button_text,
-                        'sold_out_btn_text' => $sold_out_btn_text
+                        'sold_out_btn_text' => $sold_out_btn_text,
+                        'fallback_img'      => $fallback_img
                     )
                 );
             }
