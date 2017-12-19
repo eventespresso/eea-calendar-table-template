@@ -6,9 +6,9 @@ $external_url       = $event->external_url();
 $registration_url   = !empty($external_url) ? $external_url : $event->get_permalink();
 $ext_link_class		= !empty($external_url) ? 'external-url' : '';
 //Button text
-$live_button 		= '<a class="a-register-link '.$ext_link_class.'" href="'.$registration_url.'">'.$button_text.'</a>';
+$live_button 		= '<a class="button btn a-register-link '.$ext_link_class.'" href="'.$registration_url.'">'.$button_text.'</a>';
 if ( $event->is_sold_out() ) {
-	$live_button	= '<a class="a-register-link-sold-out a-register-link" href="'.$registration_url.'">'.$sold_out_btn_text.'</a>';
+	$live_button	= '<a class="button btn a-register-link-sold-out a-register-link" href="'.$registration_url.'">'.$sold_out_btn_text.'</a>';
 }
 
 //Get the venue for this event
@@ -31,10 +31,25 @@ if ($venue instanceof EE_Venue) {
 
 //Start the table
 echo '<tr class="event-row" id="event-row-' . $event->id() . '-' . $datetime->id() . '">';
-if (isset($show_featured) && $show_featured == true && has_post_thumbnail($event->id())) : ?>
+if (isset($show_featured) && $show_featured == true) : ?>
     <td class="td-fet-image">
         <div class="featured-image">
-        <?php echo $event->feature_image('thumbnail'/*, array('align'=>'left', 'style'=>'margin:10px; border:1px solid #ccc')*/); ?>
+        <?php if (has_post_thumbnail($event->id())) : 
+        	echo '<div class="has-featured-image">';
+        	echo $event->feature_image('thumbnail'/*, array('align'=>'left', 'style'=>'margin:10px; border:1px solid #ccc')*/); 
+    	elseif (isset($fallback_img)) :
+    		echo '<div class="has-fallback-image">';
+    		echo '<img src="' . esc_url($fallback_img) . '">';
+    	elseif (get_theme_mod('custom_logo')) :
+    		echo '<div class="has-image-logo">';
+    		$logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
+			echo '<img src="' . esc_url($logo[0]) . '">';
+		else :
+			echo '<div class="has-image-placeholder">';
+		endif;
+		?>
+				<div class="fet-day-num"><?php $datetime->e_start_date('j'); ?></div>
+			</div>
         </div>
     </td>
 <?php else : ?>
