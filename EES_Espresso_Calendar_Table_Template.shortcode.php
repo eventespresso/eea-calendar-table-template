@@ -147,7 +147,8 @@ class EES_Espresso_Calendar_Table_Template extends EES_Shortcode
                 'show_featured'     => '0',
                 'table_header'      => '0',
                 'button_text'       => null,
-                'sold_out_btn_text' => null
+                'sold_out_btn_text' => null,
+                'fallback_img'      => null
             ),
             (array)$attributes
         );
