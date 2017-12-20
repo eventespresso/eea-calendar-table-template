@@ -6,7 +6,7 @@
   Requirements: (optional) CSS skills to customize styles, some renaming of the table columns
   Shortcode Example: [ESPRESSO_CALENDAR_TABLE_TEMPLATE]
   Shortcode Parameters: show_featured=1 (shows the featured image), table_header=0 (hides the TH row), title="Band / Artist", limit = 10, show_expired = FALSE, month = NULL, category_slug = NULL, order_by = start_date, sort = ASC
-  Version: 1.0.1.rc.004
+  Version: 1.0.1.rc.005
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
   Copyright 2014 Event Espresso (email : support@eventespresso.com)
@@ -40,7 +40,7 @@
  * ------------------------------------------------------------------------
  */
 // calendar_table_template version
-define( 'EE_CALENDAR_TABLE_TEMPLATE_VERSION', '1.0.1.rc.004' );
+define( 'EE_CALENDAR_TABLE_TEMPLATE_VERSION', '1.0.1.rc.005' );
 define( 'EE_CALENDAR_TABLE_TEMPLATE_PLUGIN_FILE', plugin_basename( __FILE__ ));
 
 function load_espresso_calendar_table_template() {
