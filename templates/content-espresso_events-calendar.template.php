@@ -1,15 +1,6 @@
 <?php
-//Check if external URL
-$external_url       = $event->external_url();
 
-//Create the URL to the event
-$registration_url   = !empty($external_url) ? $external_url : $event->get_permalink();
-$ext_link_class		= !empty($external_url) ? 'external-url' : '';
-//Button text
-$live_button 		= '<a class="button btn a-register-link more-link'.$ext_link_class.'" href="'.$registration_url.'">'.$button_text.'</a>';
-if ( $event->is_sold_out() ) {
-	$live_button	= '<a class="button btn a-register-link-sold-out a-register-link more-link" href="'.$registration_url.'">'.$sold_out_btn_text.'</a>';
-}
+$eventLinks = new EventEspresso\CalendarTableTemplate\presentation\helpers\EventLinks($event, $button_text, $sold_out_btn_text);
 
 //Get the venue for this event
 $venues = $event->venues();
@@ -66,7 +57,7 @@ if (isset($show_featured) && $show_featured == true) : ?>
 	<div class="info-wrapper">
 		<div class="info-main">
 			<span class="event-title">
-				<a href="<?php echo $registration_url; ?>"><?php echo $event->name(); ?></a>
+				<a href="<?php echo $eventLinks->getUrl($event); ?>"><?php echo $event->name(); ?></a>
 			</span>
 			<div class="event-time-info">
 				<?php $datetime->e_start_date_and_time($date_option, $time_option); // Start date/time ?>
@@ -84,7 +75,7 @@ if (isset($show_featured) && $show_featured == true) : ?>
 			?>
 			<div class="description"><?php echo $event_desc; ?></div>
 		</div><!-- end .info-main -->
-		<div class="status-action-text"><?php echo $live_button; ?></div>
+		<div class="status-action-text"><?php echo $eventLinks->renderHtml($event, $button_text, $sold_out_btn_text); ?></div>
 	</div><!-- end .info-wrapper -->
 </td>
 </tr>
