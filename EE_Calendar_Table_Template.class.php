@@ -1,7 +1,19 @@
 <?php 
-if (! defined('EVENT_ESPRESSO_VERSION')) {
-    exit();
-}
+use EventEspresso\core\exceptions\InvalidDataTypeException;
+use EventEspresso\core\exceptions\InvalidInterfaceException;
+use EventEspresso\core\services\collections\CollectionInterface; 
+use EventEspresso\core\services\loaders\Loader;
+use EventEspresso\core\services\loaders\LoaderFactory;
+use EventEspresso\core\services\loaders\LoaderInterface;
+use EventEspresso\core\services\shortcodes\ShortcodeInterface;
+
+defined('EVENT_ESPRESSO_VERSION') || exit; 
+
+// define the plugin directory path and URL
+define('EE_CALENDAR_TABLE_TEMPLATE_PATH', plugin_dir_path(__FILE__));
+define('EE_CALENDAR_TABLE_TEMPLATE_URL', plugin_dir_url(__FILE__));
+define('EE_CALENDAR_TABLE_TEMPLATE_TEMPLATES', EE_CALENDAR_TABLE_TEMPLATE_PATH . DS . 'templates');
+
 /**
  * ------------------------------------------------------------------------
  *
@@ -14,20 +26,42 @@ if (! defined('EVENT_ESPRESSO_VERSION')) {
  *
  * ------------------------------------------------------------------------
  */
-// define the plugin directory path and URL
-define('EE_CALENDAR_TABLE_TEMPLATE_PATH', plugin_dir_path(__FILE__));
-define('EE_CALENDAR_TABLE_TEMPLATE_URL', plugin_dir_url(__FILE__));
-define('EE_CALENDAR_TABLE_TEMPLATE_TEMPLATES', EE_CALENDAR_TABLE_TEMPLATE_PATH . DS . 'templates');
+
 class EE_Calendar_Table_Template extends EE_Addon
 {
 
     /**
-     * class constructor
+     * @var LoaderInterface $loader ;
      */
-    public function __construct()
+    private static $loader;
+
+
+
+    /**
+     * EE_Calendar_Table_Template constructor.
+     *
+     * @param LoaderInterface $loader
+     */
+    public function __construct(LoaderInterface $loader = null)
     {
-        // register our activation hook
-        register_activation_hook(__FILE__, array( $this, 'set_activation_indicator_option' ));
+        EE_Calendar_Table_Template::$loader = $loader;
+        parent::__construct();
+    }
+
+
+
+    /**
+     * @return LoaderInterface
+     * @throws InvalidArgumentException
+     * @throws InvalidInterfaceException
+     * @throws InvalidDataTypeException
+     */
+    public static function loader()
+    {
+        if (! EE_Calendar_Table_Template::$loader instanceof LoaderInterface) {
+            EE_Calendar_Table_Template::$loader = LoaderFactory::getLoader();
+        }
+        return EE_Calendar_Table_Template::$loader;
     }
 
     public static function register_addon()
@@ -41,11 +75,14 @@ class EE_Calendar_Table_Template extends EE_Addon
                 'min_core_version' => '4.9.39',
                 'base_path'        => EE_CALENDAR_TABLE_TEMPLATE_PATH,
                 'main_file_path'   => EE_CALENDAR_TABLE_TEMPLATE_PATH . 'espresso-calendar-table-template.php',
+                'namespace'        => array(
+                    'FQNS' => 'EventEspresso\CalendarTableTemplate',
+                    'DIR'  => __DIR__,
+                ),
                 //'admin_callback' => 'additional_admin_hooks',
                 'autoloader_paths' => array(
                     'EE_Calendar_Table_Template'    => EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EE_Calendar_Table_Template.class.php',
                 ),
-                'shortcode_paths'  => array( EE_CALENDAR_TABLE_TEMPLATE_PATH . 'EES_Espresso_Calendar_Table_Template.shortcode.php' ),
                 //The below is for if plugin update engine is being used for auto-updates. not needed if PUE is not being used.
                 'pue_options'      => array(
                     'pue_plugin_slug' => 'espresso_calendar_table_template',
@@ -56,6 +93,48 @@ class EE_Calendar_Table_Template extends EE_Addon
             )
         );
     }
+
+
+
+    /**
+     * Register things that have to happen early in loading.
+     */
+    public function after_registration()
+    {
+        EE_Dependency_Map::register_dependencies(
+            'EventEspresso\CalendarTableTemplate\domain\entities\shortcodes\CalendarTableTemplate',
+            array(
+                'EventEspresso\core\services\cache\PostRelatedCacheManager' => EE_Dependency_Map::load_from_cache,
+            )
+        );
+        // register our activation hook
+        register_activation_hook(__FILE__, array($this, 'set_activation_indicator_option'));
+        add_filter(
+            'FHEE__EventEspresso_core_services_shortcodes_ShortcodesManager__registerShortcodes__shortcode_collection',
+            array($this, 'registerShortcodes')
+        );
+    }
+
+
+
+    /**
+     * @param CollectionInterface|ShortcodeInterface[] $shortcodeCollection
+     * @return CollectionInterface|ShortcodeInterface[]
+     * @throws InvalidArgumentException
+     * @throws InvalidDataTypeException
+     * @throws InvalidInterfaceException
+     */
+    public function registerShortcodes(CollectionInterface $shortcodeCollection)
+    {
+        $shortcodeCollection->add(
+            EE_Calendar_Table_Template::loader()->getNew(
+                'EventEspresso\CalendarTableTemplate\domain\entities\shortcodes\CalendarTableTemplate'
+            )
+        );
+        return $shortcodeCollection;
+    }
+ 
+
 
     /**
      *  additional_admin_hooks
