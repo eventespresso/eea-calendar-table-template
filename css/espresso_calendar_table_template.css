@@ -6,6 +6,9 @@
 /*
 General Styles
 ---------------------------------------------------------------------------------------------------- */
+.event-row {
+	height: 170px;
+}
 .event-title a {
 	font-size: 35px;
 	text-transform: uppercase;
@@ -13,15 +16,42 @@ General Styles
 	text-decoration: none;
 	line-height: 120%;
 }
-img.buytix_button {
-	border: 0 !important;
-	border-radius: 0px 0px 0px;
-	-webkit-box-shadow: 0px 0px 0px;
-	box-shadow:         0px 0px 0px;
+.info-wrapper {
+	position: relative;
+}
+.info-main {
+	width: 70%;
+}
+.status-action-text {
+	position: absolute;
+	right: 0;
+	top: 0;
+	margin-right: 2px;
+	max-width: 28%;
+	text-align: center
+}
+.status-action-text a {
+	padding: 12px;
+	display: inline-block;
+	font-weight: bold;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+.status-action-text a:hover {
+	box-shadow: none;
+	-webkit-box-shadow: none;
+}
+.external-url:after {
+	font-family: dashicons;
+	content: "\f504";
 }
 .cal-table-list td {
 	vertical-align: top !important;
+	padding: 0;
 	padding-top: 10px !important;
+}
+.cal-table-list th {
+	padding: 0;
 }
 .cal-header-month-name {
 	text-align: center !important;
@@ -45,6 +75,8 @@ img.buytix_button {
 	background:      -o-linear-gradient(top, #fcfcfc 0%, #dad8d8 100%);
 	background:     -ms-linear-gradient(top, #fcfcfc 0%, #dad8d8 100%);
 	background:         linear-gradient(top, #fcfcfc 0%, #dad8d8 100%);
+}
+.dater {
 	border: 1px solid #d2d2d2;
 	border-radius: 10px;
 	-webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
@@ -100,6 +132,24 @@ div.cal-day-num {
 	padding-top: 10px !important;
 	padding-bottom: 10px !important;
 }
+.featured-image > div {
+    height: 150px;
+    width: 150px;
+    position: relative;
+}
+.has-image-placeholder {
+    background-color: #c4c4c4;
+}
+.fet-day-num {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 64px;
+	font-size: 4rem;
+    font-weight: bold;
+    color: #fff;
+}
 .td-date-holder {
 	width: 120px;
 	padding-top: 10px !important;
@@ -119,19 +169,43 @@ div.cal-day-num {
 	min-width: 90px;
 }
 
-
 /* Media Query for screens smaller then 768px (iPad portrait)
 ---------------------------------------------------------------------------------------------------- */
 
 @media only screen and (max-width: 767px) {
+	.info-main {
+		width: auto;
+	}
+	.status-action-text {
+		position: initial;
+		margin-top: 10px;
+		width: 50%;
+		max-width: 100%;
+	}
+	.status-action-text a {
+		position: initial;
+	}
 }
 
 @media only screen and (max-width: 600px) and (min-width: 481px) {
 }
 
 @media only screen and (max-width: 540px) and (min-width: 480px) {
+	.status-action-text {
+		width: 100%;
+	}
 }
 
 @media only screen and (max-width: 480px) {
+	.td-fet-image { 
+		width: 100px;
+	}
+	.featured-image > div {
+		width: 100px;
+		height: 100px;
+	}
+	.status-action-text {
+		width: 100%;
+	}
 }
 
