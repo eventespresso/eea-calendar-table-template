@@ -6,9 +6,9 @@ $external_url       = $event->external_url();
 $registration_url   = !empty($external_url) ? $external_url : $event->get_permalink();
 $ext_link_class		= !empty($external_url) ? 'external-url' : '';
 //Button text
-$live_button 		= '<a class="button btn a-register-link '.$ext_link_class.'" href="'.$registration_url.'">'.$button_text.'</a>';
+$live_button 		= '<a class="button btn a-register-link more-link'.$ext_link_class.'" href="'.$registration_url.'">'.$button_text.'</a>';
 if ( $event->is_sold_out() ) {
-	$live_button	= '<a class="button btn a-register-link-sold-out a-register-link" href="'.$registration_url.'">'.$sold_out_btn_text.'</a>';
+	$live_button	= '<a class="button btn a-register-link-sold-out a-register-link more-link" href="'.$registration_url.'">'.$sold_out_btn_text.'</a>';
 }
 
 //Get the venue for this event
