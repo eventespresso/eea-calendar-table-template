@@ -1,24 +1,7 @@
 <?php
 
 $eventLinks = new EventEspresso\CalendarTableTemplate\presentation\helpers\EventLinks($event, $button_text, $sold_out_btn_text);
-
-//Get the venue for this event
-$venues = $event->venues();
-$venue = reset($venues);
-
-if ($venue instanceof EE_Venue) {
-    $venue_name = $venue->name();
-    $venue_address = $venue->address();
-    $venue_city = $venue->city();
-    if ($venue->state_obj() instanceof EE_State) {
-        $state = $venue->state_obj()->name();
-    }
-} else {
-    $venue_name = '';
-    $venue_address = '';
-    $venue_city = '';
-    $state = '';
-}
+$venueInfo  = new EventEspresso\CalendarTableTemplate\presentation\helpers\VenueInfo($event);
 
 //Start the table
 echo '<tr class="event-row" id="event-row-' . $event->id() . '-' . $datetime->id() . '">';
@@ -63,11 +46,7 @@ if (isset($show_featured) && $show_featured == true) : ?>
 				<?php $datetime->e_start_date_and_time($date_option, $time_option); // Start date/time ?>
 			</div><!-- end .event-time-info -->
 			<div class="venue-info">
-				<?php $venue_info  = (isset($venue_name) && !empty($venue_name)) ? $venue_name : '';
-					  $venue_info .= (isset($venue_city) && !empty($venue_city)) ? ', '.$venue_city :'';
-					  $venue_info .= (isset($state) && !empty($state)) ? ', '.$state : '';
-					  echo $venue_info;
-				?>
+				<?php echo $venueInfo->getVenue($event); ?>
 			</div><!-- end .venue-info -->
 			<?php //Event description
 			$event_desc = explode('<!--more-->', $event->description_filtered());
