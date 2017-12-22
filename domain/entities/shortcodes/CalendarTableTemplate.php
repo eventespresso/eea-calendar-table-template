@@ -170,7 +170,7 @@ class CalendarTableTemplate extends EspressoShortcode
             // defaults
             array(
                 'title'             => null,
-                'limit'             => 10,
+                'limit'             => 1000,
                 'show_expired'      => false,
                 'month'             => null,
                 'category_slug'     => null,
