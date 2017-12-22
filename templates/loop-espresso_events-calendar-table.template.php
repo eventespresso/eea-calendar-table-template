@@ -75,7 +75,7 @@ if (class_exists('EE_Registry')) :
 // the loop
     if (! empty($datetimes)) {
         // allow other stuff
-        do_action('AHEE__espresso_calendar_table_template_template__before_loop');
+        do_action('AHEE__espresso_calendar_table_template_template__before_loop', '$datetimes');
         echo '<table class="cal-table-list">';
 
         foreach ($datetimes as $datetime) {
@@ -126,6 +126,6 @@ if (class_exists('EE_Registry')) :
         }
         echo '</table>';
         // allow moar other stuff
-        do_action('AHEE__espresso_calendar_table_template_template__after_loop');
+        do_action('AHEE__espresso_calendar_table_template_template__after_loop', $datetimes);
     }
 endif; ?>
