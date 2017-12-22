@@ -5,9 +5,16 @@ namespace EventEspresso\CalendarTableTemplate\presentation\helpers;
 class VenueInfo
 {
 
-	public function getVenue($event)
+	protected $_event;
+
+	public function __construct(\EE_Event $event)
+	{
+		$this->_event = $event;
+	}
+
+	public function getVenue()
 	{	
-		$venues = $event->venues();
+		$venues = $this->_event->venues();
 		$venue = reset($venues);
 
 		if ($venue instanceof \EE_Venue) {
