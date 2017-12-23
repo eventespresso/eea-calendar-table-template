@@ -4,6 +4,7 @@ namespace EventEspresso\CalendarTableTemplate\domain\entities\shortcodes;
 
 use EEH_Template;
 use EventEspresso\core\services\shortcodes\EspressoShortcode;
+use EventEspresso\CalendarTableTemplate\domain\queries\CalendarTableTemplateQuery;
 
 defined('EVENT_ESPRESSO_VERSION') || exit;
 
@@ -147,12 +148,16 @@ class CalendarTableTemplate extends EspressoShortcode
             'FHEE__EEH_Template__locate_template__template_folder_paths',
             array($this, 'templateFolderPaths')
         );
+        // run the query
+        $datetimeQuery = new CalendarTableTemplateQuery($attributes);
+        $datetimes = $datetimeQuery->query();
         // load our template
         $calendar_table_template = EEH_Template::get_template_part(
             'loop',
             'espresso_events-calendar-table.template',
             array(
                 'attributes' => $attributes,
+                'datetimes'  => $datetimes,
                 'options'    => $options
             )
         );
