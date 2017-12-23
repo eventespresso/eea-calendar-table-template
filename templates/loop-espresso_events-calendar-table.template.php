@@ -1,8 +1,5 @@
 <?php
-// Options
-$date_option = get_option('date_format');
-$time_option = get_option('time_format');
-$temp_month = '';
+
 $button_text = !isset($attributes['button_text']) ? 
                     esc_html__('View Details', 'event_espresso') : 
                     $attributes['button_text'];
@@ -10,11 +7,8 @@ $sold_out_btn_text = $attributes['sold_out_btn_text'];
 $sold_out_btn_text = !isset($sold_out_btn_text) ? esc_html__('Sold Out', 'event_espresso') : $sold_out_btn_text;
 
 $category_id_or_slug = $attributes['category_slug'];
-$title = $attributes['title'];
-$table_header = filter_var($attributes['table_header'], FILTER_VALIDATE_BOOLEAN);
 $show_expired = filter_var($attributes['show_expired'], FILTER_VALIDATE_BOOLEAN);
-$show_featured = filter_var($attributes['show_featured'], FILTER_VALIDATE_BOOLEAN);
-$fallback_img = $attributes['fallback_img'];
+
 
 if ( $category_id_or_slug ) {
     //Allow for multiple categories
@@ -75,13 +69,13 @@ if (class_exists('EE_Registry')) :
 // the loop
     if (! empty($datetimes)) {
         // allow other stuff
-        do_action('AHEE__espresso_calendar_table_template_template__before_loop', '$datetimes');
+        do_action('AHEE__espresso_calendar_table_template_template__before_loop', $datetimes);
         echo '<table class="cal-table-list">';
 
         foreach ($datetimes as $datetime) {
             $full_month = $datetime->start_date('M');
 
-            if ($temp_month != $full_month) {
+            if ($options['temp_month'] != $full_month) {
                 ?>
                 <tr class="cal-header-month">
                 <th class="cal-header-month-name" id="calendar-header-<?php echo $full_month; ?>" colspan="3">
@@ -89,20 +83,19 @@ if (class_exists('EE_Registry')) :
                 </th>
                 </tr>
                 <?php
-                if (isset($table_header) && $table_header == '1') { ?>
+                if ($attributes['table_header'] && $attributes['table_header'] == '1') { ?>
                     <tr class="cal-header">
-                        <th><?php echo !isset($show_featured) || $show_featured === 'false' ? __('Date', 'event_espresso') :  '' ?></th>
-                        <th class="th-event-info">
-                            <?php if (isset($title)) {
-                                echo $title;
+                        <th><?php esc_html_e('Date', 'event_espresso'); ?></th>
+                        <th>
+                            <?php if ($attributes['title']) {
+                                esc_html_e($attributes['title']);
                             } else {
                                 esc_html_e('Band / Artist', 'event_espresso');
                             } ?></th>
-                        <th class="th-tickets"><?php esc_html_e('Tickets', 'event_espresso'); ?></th>
                     </tr>
                 <?php
                 }
-                $temp_month = $full_month;
+                $options['temp_month'] = $full_month;
             }
 
             $event = $datetime->event();
@@ -113,13 +106,13 @@ if (class_exists('EE_Registry')) :
                     array(
                         'datetime'          => $datetime,
                         'event'             => $event,
-                        'date_option'       => $date_option,
-                        'time_option'       => $time_option,
-                        'show_featured'     => $show_featured,
-                        'table_header'      => $table_header,
+                        'date_option'       => $options['date_option'],
+                        'time_option'       => $options['time_option'],
+                        'show_featured'     => $attributes['show_featured'],
+                        'table_header'      => $attributes['table_header'],
                         'button_text'       => $button_text,
                         'sold_out_btn_text' => $sold_out_btn_text,
-                        'fallback_img'      => $fallback_img
+                        'fallback_img'      => $attributes['fallback_img']
                     )
                 );
             }

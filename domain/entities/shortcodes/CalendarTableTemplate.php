@@ -4,7 +4,6 @@ namespace EventEspresso\CalendarTableTemplate\domain\entities\shortcodes;
 
 use EEH_Template;
 use EventEspresso\core\services\shortcodes\EspressoShortcode;
-// use EventEspresso\TableTemplate\domain\queries\EventsTableTemplateQuery;
 
 defined('EVENT_ESPRESSO_VERSION') || exit;
 
@@ -137,10 +136,12 @@ class CalendarTableTemplate extends EspressoShortcode
      * @param array $attributes
      * @return string
      */
-    public function processShortcode($attributes = array())
+    public function processShortcode($attributes = array(), $options = array())
     {
         // grab attributes and merge with defaults
         $attributes = $this->getAttributes($attributes);
+        // get set options
+        $options    = $this->getOptions($options);
         // now filter the array of locations to search for templates
         add_filter(
             'FHEE__EEH_Template__locate_template__template_folder_paths',
@@ -150,7 +151,10 @@ class CalendarTableTemplate extends EspressoShortcode
         $calendar_table_template = EEH_Template::get_template_part(
             'loop',
             'espresso_events-calendar-table.template',
-            array('attributes' => $attributes)
+            array(
+                'attributes' => $attributes,
+                'options'    => $options
+            )
         );
         return $calendar_table_template;
     }
@@ -164,13 +168,22 @@ class CalendarTableTemplate extends EspressoShortcode
      * @return array
      */
     private function getAttributes(array $attributes)
-    {
+    {   
+        if(!empty($attributes['table_header'])) {
+            $attributes['table_header'] = filter_var($attributes['table_header'], FILTER_VALIDATE_BOOLEAN);
+        }
+        if(!empty($attributes['show_expired'])) {
+            $attributes['show_expired'] = filter_var($attributes['show_expired'], FILTER_VALIDATE_BOOLEAN);
+        }
+        if(!empty($attributes['show_featured'])) {
+            $attributes['show_featured'] = filter_var($attributes['show_featured'], FILTER_VALIDATE_BOOLEAN);
+        }
         // make sure $attributes is an array
         $attributes = array_merge(
             // defaults
             array(
                 'title'             => null,
-                'limit'             => 1000,
+                'limit'             => 10,
                 'show_expired'      => false,
                 'month'             => null,
                 'category_slug'     => null,
@@ -188,6 +201,22 @@ class CalendarTableTemplate extends EspressoShortcode
     }
 
 
+
+    /**
+     * get and set options required in templates
+     *
+     * @param array $options
+     * @return array
+     */
+    private function getOptions(array $options)
+    {
+        $options = array(
+            'date_option' => get_option('date_format'),
+            'time_option' => get_option('time_format'),
+            'temp_month'  => ''
+        );
+        return $options;
+    }
 
     /**
      * @param array $template_folder_paths
