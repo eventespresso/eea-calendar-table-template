@@ -97,9 +97,9 @@ class CalendarTableTemplateQuery
 			$datetimes = \EE_Registry::instance()->load_model('Datetime')->get_all(
 				array(
     	    		$where,
-    	    		'limit' => $this->_limit,
+    	    		'limit'    => $this->_limit,
     	    		'order_by' => $this->_order_by,
-    	    		'order' => $this->_sort,
+    	    		'order'    => $this->_sort
     			)
 			);
 		}
