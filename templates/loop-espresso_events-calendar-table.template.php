@@ -1,11 +1,5 @@
 <?php
 
-$button_text = !isset($attributes['button_text']) ? 
-                    esc_html__('View Details', 'event_espresso') : 
-                    $attributes['button_text'];
-$sold_out_btn_text = $attributes['sold_out_btn_text'];
-$sold_out_btn_text = !isset($sold_out_btn_text) ? esc_html__('Sold Out', 'event_espresso') : $sold_out_btn_text;
-
 // the loop
     if (! empty($datetimes)) {
         // allow other stuff
@@ -50,8 +44,8 @@ $sold_out_btn_text = !isset($sold_out_btn_text) ? esc_html__('Sold Out', 'event_
                         'time_option'       => $options['time_option'],
                         'show_featured'     => $attributes['show_featured'],
                         'table_header'      => $attributes['table_header'],
-                        'button_text'       => $button_text,
-                        'sold_out_btn_text' => $sold_out_btn_text,
+                        'button_text'       => $attributes['button_text'],
+                        'sold_out_btn_text' => $attributes['sold_out_btn_text'],
                         'fallback_img'      => $attributes['fallback_img']
                     )
                 );

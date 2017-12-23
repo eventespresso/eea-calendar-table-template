@@ -183,6 +183,12 @@ class CalendarTableTemplate extends EspressoShortcode
         if(!empty($attributes['show_featured'])) {
             $attributes['show_featured'] = filter_var($attributes['show_featured'], FILTER_VALIDATE_BOOLEAN);
         }
+        $button_text = !isset($attributes['button_text']) ? 
+                    esc_html__('View Details', 'event_espresso') : 
+                    $attributes['button_text'];
+        $sold_out_btn_text = !isset($attributes['sold_out_btn_text']) ? 
+                    esc_html__('Sold Out', 'event_espresso') : 
+                    $attributes['sold_out_btn_text'];
         // make sure $attributes is an array
         $attributes = array_merge(
             // defaults
@@ -196,8 +202,8 @@ class CalendarTableTemplate extends EspressoShortcode
                 'sort'              => 'ASC',
                 'show_featured'     => '0',
                 'table_header'      => '0',
-                'button_text'       => null,
-                'sold_out_btn_text' => null,
+                'button_text'       => $button_text,
+                'sold_out_btn_text' => $sold_out_btn_text,
                 'fallback_img'      => null
             ),
             (array)$attributes
