@@ -50,8 +50,11 @@ General Styles
 	padding: 0;
 	padding-top: 10px !important;
 }
-.cal-table-list th {
-	padding: 0;
+.cal-header th { 
+	padding: 10px 0 10px 10px;
+}
+.cal-header th:nth-of-type(1) {
+	padding: 10px 0 10px 0;
 }
 .cal-header-month-name {
 	text-align: center !important;
@@ -156,8 +159,7 @@ div.cal-day-num {
 	padding-bottom: 30px !important;
 	padding-left: 10px;
 }
-.td-event-info,
-.th-event-info {
+.td-event-info {
 	padding-top: 10px !important;
 	padding-left: 10px !important;
 }
