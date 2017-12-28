@@ -1,30 +1,14 @@
 <?php
 
-$eventLinks = new EventEspresso\CalendarTableTemplate\presentation\helpers\EventLinks($event, $button_text, $sold_out_btn_text);
-$venueInfo  = new EventEspresso\CalendarTableTemplate\presentation\helpers\VenueInfo($event);
+$eventLinks    = new EventEspresso\CalendarTableTemplate\presentation\helpers\EventLinks($event, $button_text, $sold_out_btn_text);
+$featuredImage = new EventEspresso\CalendarTableTemplate\presentation\helpers\FeaturedImage($datetime, $event, $fallback_img);
+$venueInfo     = new EventEspresso\CalendarTableTemplate\presentation\helpers\VenueInfo($event);
 
 //Start the table
 echo '<tr class="event-row" id="event-row-' . $event->id() . '-' . $datetime->id() . '">';
 if (isset($show_featured) && $show_featured == true) : ?>
     <td class="td-fet-image">
-        <div class="featured-image">
-        <?php if (has_post_thumbnail($event->id())) : 
-        	echo '<div class="has-featured-image">';
-        	echo $event->feature_image('thumbnail'/*, array('align'=>'left', 'style'=>'margin:10px; border:1px solid #ccc')*/); 
-    	elseif (isset($fallback_img)) :
-    		echo '<div class="has-fallback-image">';
-    		echo '<img src="' . esc_url($fallback_img) . '">';
-    	elseif (get_theme_mod('custom_logo')) :
-    		echo '<div class="has-image-logo">';
-    		$logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' );
-			echo '<img src="' . esc_url($logo[0]) . '">';
-		else :
-			echo '<div class="has-image-placeholder">';
-		endif;
-		?>
-				<div class="fet-day-num"><?php $datetime->e_start_date('j'); ?></div>
-			</div>
-        </div>
+        <div class="featured-image"><?php echo $featuredImage->renderHTML(); ?></div>
     </td>
 <?php else : ?>
     <td class="td-date-holder">
