@@ -13,7 +13,7 @@ if (! empty($datetimes)) {
             ?>
             <tr class="cal-header-month">
             <th class="cal-header-month-name" id="calendar-header-<?php echo $full_month; ?>" colspan="3">
-                <?php echo date_i18n('F', strtotime($full_month)); ?>
+                <?php echo date_i18n('F', strtotime("first day of " . $full_month)); ?>
             </th>
             </tr>
             <?php
