@@ -151,6 +151,13 @@ class CalendarTableTemplate extends EspressoShortcode
         // run the query
         $datetimeQuery = new CalendarTableTemplateQuery($attributes);
         $datetimes = $datetimeQuery->query();
+        wp_localize_script(
+            'espresso_calendar_table_template', 
+            'eeCalTable', 
+            array(
+                'url' => get_permalink() 
+            ) 
+        );
         // load our template
         $calendar_table_template = EEH_Template::get_template_part(
             'loop',
@@ -194,7 +201,8 @@ class CalendarTableTemplate extends EspressoShortcode
             // defaults
             array(
                 'title'             => null,
-                'limit'             => 10,
+                'limit'             => 999,
+                'per_page'          => 10,
                 'show_expired'      => false,
                 'month'             => null,
                 'category_slug'     => null,

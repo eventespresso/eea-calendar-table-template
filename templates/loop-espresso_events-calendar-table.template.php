@@ -3,10 +3,16 @@
 // the loop
 if (! empty($datetimes)) {
     // allow other stuff
-    do_action('AHEE__espresso_calendar_table_template_template__before_loop', $datetimes);
-    echo '<table class="cal-table-list">';
 
-    foreach ($datetimes as $datetime) {
+    $page = isset($_GET['calpage']) ? intval($_GET['calpage']-1) : 0;
+    $number_of_pages = intval(count($datetimes)/$attributes['per_page'])+1;
+
+    do_action('AHEE__espresso_calendar_table_template_template__before_loop', $datetimes);
+    ?>
+  <div id="lazyload">
+    <table class="cal-table-list page" id="p<?php echo $page; ?>">
+    <?php
+    foreach (array_slice($datetimes, $attributes['per_page']*$page, $attributes['per_page']) as $datetime) {
         $full_month = $datetime->start_date('M');
 
         if ($options['temp_month'] != $full_month) {
@@ -51,7 +57,10 @@ if (! empty($datetimes)) {
             );
         }
     }
-    echo '</table>';
+    ?> 
+    </table>
+  </div>
+    <?php
     // allow moar other stuff
     do_action('AHEE__espresso_calendar_table_template_template__after_loop', $datetimes);
 }
