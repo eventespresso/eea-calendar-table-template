@@ -140,6 +140,10 @@ div.cal-day-num {
     width: 150px;
     position: relative;
 }
+.featured-image img {
+	max-width: 150px;
+	height: auto;
+}
 .has-image-placeholder {
     background-color: #c4c4c4;
 }
