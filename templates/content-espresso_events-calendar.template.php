@@ -21,7 +21,8 @@ if (isset($show_featured) && $show_featured == true) : ?>
 <?php endif;
 ?>
 <td class="td-event-info">
-	<div class="info-wrapper">
+	<div class="info-wrapper ee-clearfix">
+		<div class="status-action-text"><?php echo $eventLinks->renderHtml(); ?></div>		
 		<div class="info-main">
 			<span class="event-title">
 				<a href="<?php echo $eventLinks->getUrl(); ?>"><?php echo $event->name(); ?></a>
@@ -38,7 +39,6 @@ if (isset($show_featured) && $show_featured == true) : ?>
 			?>
 			<div class="description"><?php echo $event_desc; ?></div>
 		</div><!-- end .info-main -->
-		<div class="status-action-text"><?php echo $eventLinks->renderHtml(); ?></div>
 	</div><!-- end .info-wrapper -->
 </td>
 </tr>
