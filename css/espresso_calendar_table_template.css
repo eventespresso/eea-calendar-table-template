@@ -37,6 +37,9 @@ General Styles
 	font-family: dashicons;
 	content: "\f504";
 }
+.cal-table-list {
+	width: 100%;
+}
 .cal-table-list td {
 	vertical-align: top !important;
 	padding: 0;
@@ -171,39 +174,33 @@ div.cal-day-num {
 ---------------------------------------------------------------------------------------------------- */
 
 @media only screen and (max-width: 767px) {
-	.info-main {
-		width: auto;
-	}
-	.status-action-text {
-		position: initial;
-		margin-top: 10px;
-		width: 50%;
-		max-width: 100%;
-	}
-	.status-action-text a {
-		position: initial;
-	}
+
 }
 
 @media only screen and (max-width: 600px) and (min-width: 481px) {
 }
 
 @media only screen and (max-width: 540px) and (min-width: 480px) {
-	.status-action-text {
-		width: 100%;
-	}
+
 }
 
 @media only screen and (max-width: 480px) {
-	.td-fet-image { 
-		width: 100px;
-	}
-	.featured-image > div {
+	.td-fet-image,
+	.featured-image > div  { 
 		width: 100px;
 		height: 100px;
 	}
+	.featured-image img {
+		width: 100px;
+	}
+	.td-event-info {
+		position: relative;
+	}
 	.status-action-text {
-		width: 100%;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		float: none;
 	}
 }
 
