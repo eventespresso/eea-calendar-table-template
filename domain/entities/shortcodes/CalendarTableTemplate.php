@@ -208,7 +208,7 @@ class CalendarTableTemplate extends EspressoShortcode
                 'category_slug'     => null,
                 'order_by'          => 'DTT_EVT_start',
                 'sort'              => 'ASC',
-                'show_featured'     => '0',
+                'show_featured'     => '1',
                 'table_header'      => '0',
                 'button_text'       => $button_text,
                 'sold_out_btn_text' => $sold_out_btn_text,
