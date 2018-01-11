@@ -30,7 +30,7 @@ if (! empty($datetimes)) {
                         <?php if ($attributes['title']) {
                             esc_html_e($attributes['title']);
                         } else {
-                            esc_html_e('Band / Artist', 'event_espresso');
+                            esc_html_e('Title', 'event_espresso');
                         } ?></th>
                 </tr>
             <?php

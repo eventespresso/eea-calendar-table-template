@@ -5,7 +5,7 @@
   Description: The Event Espresso Calendar Table Template adds a calendar table view to Event Espresso 4. Add [ESPRESSO_CALENDAR_TABLE_TEMPLATE] to any WordPress page/post.
   Requirements: (optional) CSS skills to customize styles, some renaming of the table columns
   Shortcode Example: [ESPRESSO_CALENDAR_TABLE_TEMPLATE]
-  Shortcode Parameters: show_featured=1 (shows the featured image), table_header=0 (hides the TH row), title="Band / Artist", limit = 10, show_expired = FALSE, month = NULL, category_slug = NULL, order_by = start_date, sort = ASC
+  Shortcode Parameters: show_featured=1 (shows the featured image), table_header=0 (hides the TH row), title="Title", limit = 10, show_expired = FALSE, month = NULL, category_slug = NULL, order_by = start_date, sort = ASC
   Version: 1.0.1.rc.006
   Author: Event Espresso
   Author URI: http://www.eventespresso.com
