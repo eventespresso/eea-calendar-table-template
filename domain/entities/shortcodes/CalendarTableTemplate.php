@@ -97,6 +97,7 @@ class CalendarTableTemplate extends EspressoShortcode
         // enqueue
         wp_enqueue_style('espresso_calendar_table_template');
         wp_enqueue_script('espresso_calendar_table_template');
+        wp_dequeue_script( 'espresso_calendar' );
     }
 
 
