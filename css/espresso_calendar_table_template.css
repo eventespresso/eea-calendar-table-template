@@ -40,6 +40,7 @@ General Styles
 .cal-table-list {
 	width: 100%;
 	text-align: left;
+	table-layout: auto;
 }
 .cal-table-list,
 .cal-table-list th,
