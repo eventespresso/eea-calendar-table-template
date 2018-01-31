@@ -39,12 +39,23 @@ General Styles
 }
 .cal-table-list {
 	width: 100%;
+	text-align: left;
+}
+.cal-table-list,
+.cal-table-list th,
+.cal-table-list tr,
+.cal-table-list td {
+	border-collapse: collapse;
+}
+.cal-table-list tr {
+	border-bottom: 1px solid #ececec;
 }
 .cal-table-list td,
 .cal-table-list td.td-fet-image {
 	vertical-align: top !important;
 	padding: 0;
 	padding-top: 10px !important;
+	border: none;
 }
 .cal-header th { 
 	padding: 10px 0 10px 10px;
@@ -170,6 +181,13 @@ div.cal-day-num {
 .th-tickets {
 	min-width: 90px;
 }
+
+/* theme-specific fixes */
+/* padhang */
+.cal-table-list img {
+	display: inline;
+}
+
 
 /* Media Query for screens smaller then 768px (iPad portrait)
 ---------------------------------------------------------------------------------------------------- */
