@@ -40,7 +40,7 @@ class EventLinks
 	public function renderHtml()
 	{
 		//Button text
-		$live_button = '<a class="button btn a-register-link more-link '.$this->getExtUrlClass().'" href="'.$this->getUrl().'">'.$this->button_text.'</a>';
+		$live_button = '<a class="button a-register-link more-link '.$this->getExtUrlClass().'" href="'.$this->getUrl().'">'.$this->button_text.'</a>';
 		if ( $this->_event->is_sold_out() ) {
 			$live_button = '<a class="button btn a-register-link-sold-out a-register-link more-link" href="'.$this->getUrl().'">'.$this->sold_out_btn_text.'</a>';
 		}	
