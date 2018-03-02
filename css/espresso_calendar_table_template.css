@@ -51,8 +51,8 @@ General Styles
 .cal-table-list tr {
 	border-bottom: 1px solid #ececec;
 }
-.cal-table-list td,
-.cal-table-list td.td-fet-image {
+.cal-table-list .event-row td,
+.cal-table-list .event-row td.td-fet-image {
 	vertical-align: top !important;
 	padding: 0;
 	padding-top: 10px !important;
@@ -164,6 +164,7 @@ div.cal-day-num {
 	font-size: 4rem;
     font-weight: bold;
     color: #fff;
+    word-break: normal;
 }
 .td-date-holder {
 	width: 120px;
@@ -171,9 +172,9 @@ div.cal-day-num {
 	padding-bottom: 30px !important;
 	padding-left: 10px;
 }
-.td-event-info {
-	padding-top: 10px !important;
-	padding-left: 10px !important;
+tr.event-row td.td-event-info {
+	padding-top: 10px;
+	padding-left: 10px;
 }
 .td-event-register {
 	padding: 40px 5px 5px 0px !important;
@@ -194,7 +195,10 @@ div.cal-day-num {
 ---------------------------------------------------------------------------------------------------- */
 
 @media only screen and (max-width: 767px) {
-
+	.event-title a {
+		font-size: 25px;
+		font-size: 2.5rem;
+	}
 }
 
 @media only screen and (max-width: 600px) and (min-width: 481px) {
@@ -205,22 +209,48 @@ div.cal-day-num {
 }
 
 @media only screen and (max-width: 480px) {
+
+	.td-date-holder,
 	.td-fet-image,
-	.featured-image > div  { 
-		width: 100px;
-		height: 100px;
+	.td-event-info {
+		display: block;
 	}
-	.featured-image img {
-		width: 100px;
+	.event-row .td-event-info .info-wrapper {
+		margin-bottom: 20px;
 	}
 	.td-event-info {
 		position: relative;
 	}
 	.status-action-text {
 		position: absolute;
-		bottom: 0;
+		top: -160px;
 		right: 0;
 		float: none;
 	}
+	tr.event-row td.td-event-info {
+		padding-left: 0;
+	}
+	.info-main {
+		padding: 10px 0;
+	}
+	.event-title a {
+		font-size: 20px;
+		font-size: 2rem;
+	}
 }
 
+@media only screen and (max-width: 400px) {
+	.td-fet-image,
+	.featured-image > div  { 
+		width: 120px;
+		height: 120px;
+	}
+	.featured-image img {
+		width: 120px;
+	}
+	.status-action-text {
+		top: -110px;
+		max-width: 50%;
+		text-align: center;
+	}
+}
