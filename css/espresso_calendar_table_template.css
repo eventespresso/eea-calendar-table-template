@@ -162,6 +162,8 @@ div.cal-day-num {
 	transform: translate(-50%, -50%);
 	font-size: 64px;
 	font-size: 4rem;
+	line-height: 64px;
+	line-height: 4rem;
     font-weight: bold;
     color: #fff;
     word-break: normal;
